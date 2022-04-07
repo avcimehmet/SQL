@@ -16,20 +16,22 @@ ON t.AlbumId = a.AlbumId;
 should include album id, album title and duration of the track sorted from 
 highest to lowest. */
 
-SELECT t.AlbumId, a.Title, MIN(t.Milliseconds) as min_duration
+SELECT t.AlbumId, a.Title, MAX(t.Milliseconds) as max_duration
 FROM tracks t LEFT JOIN albums a
 ON t.AlbumId = a.AlbumId
 GROUP BY a.Title
-ORDER BY t.AlbumId;
+ORDER BY t.AlbumId
+LIMIT 10;
 
 /* Find the total duration of each album. Your solution should include 
 album id, album title and its total duration sorted from highest to lowest. */
 
-SELECT t.AlbumId, a.Title, sum(t.Milliseconds) as Total_duration
+SELECT t.AlbumId, a.Title, round(avg(t.Milliseconds),3) as avg_duration
 FROM tracks t LEFT JOIN albums a
 ON t.AlbumId = a.AlbumId
 GROUP BY a.Title
-ORDER BY t.AlbumId;
+ORDER BY t.AlbumId
+LIMIT 10;
 
 /* Based on the previous question, find the albums whose total duration 
 is higher than 70 minutes. Your solution should include album title 
